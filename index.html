@@ -2,6 +2,20 @@
 <head>
     <title>Jumpan's Personal Website</title>
     <link rel="stylesheet" href="styles.css">
+
+    <script>
+        function loadPage(url) {
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET", url, true);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              document.getElementById("content").innerHTML = xhr.responseText;
+            }
+          };
+          xhr.send();
+        }
+      </script>
+
 </head>
 <!--导航栏-->
 <header>
@@ -9,13 +23,14 @@
         <img src="https://imgc.cc/2023/06/22/64944b607f95b.jpg" alt="Logo">
     </div>
     <nav>
-        <a href="index.html" class="nav-link">主页</a>
+        <a href="index.html" class="nav-link" >主页</a>
         <a href="page2.html" class="nav-link">文章</a>
         <a href="page3.html" class="nav-link">联系我</a>
     </nav>
+
+
 </header>
 <body>
-
     <!-- 基本信息模块 -->
     <section id="basic-info">
         <div id="avatar-container">
@@ -41,5 +56,36 @@
 
     </section>
     <script src="main.js"></script>
+
+
+
+
+    <audio id="myAudio"  controls style="display: none;">
+        <source src="https://music.163.com/song/media/outer/url?id=1401353320" type="audio/mp3">
+        您的浏览器不支持自动播放音乐。
+    </audio>
+
+    <button id="playButton" onclick="toggleAudio()">播放音乐</button>
+    <div id="content">
+        <!-- 初始页面内容 -->
+      </div>
+    
+    <script>
+      var audio = document.getElementById("myAudio");
+      var playButton = document.getElementById("playButton");
+  
+      function toggleAudio() {
+        if (audio.paused) {
+          audio.play();
+          playButton.innerHTML = "关闭音乐";
+        } else {
+          audio.pause();
+          playButton.innerHTML = "播放音乐";
+        }
+      }
+      // 加载初始页面
+        loadPage("index.html");
+    </script>
+
 </body>
 </html>
